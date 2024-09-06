@@ -1,0 +1,268 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Layout */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #4a4e69; /* Dark lavender color */
+  color: white;
+  padding: 2rem;
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.nav-menu {
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #9a8c98; /* Light lavender on hover */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #f2e9e4; /* Light background */
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #22223b;
+}
+
+.courses-section,
+.progress-section,
+.home-section {
+  margin-top: 2rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.course-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.course-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.continue-button {
+  background-color: #c9ada7; /* Light pink button */
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.continue-button:hover {
+  background-color: #4a4e69; /* Dark lavender on hover */
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.stat-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 30%;
+}
+
+.stat-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  font-size: 1.5rem;
+  color: #4a4e69; /* Dark lavender text */
+}
+
+/* Bot Container */
+.bot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #e6e6fa; /* Light shade of lavender */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it's on top of other content */
+}
+
+.bot-image-container {
+  position: fixed;
+  bottom: 20px; /* Adjust distance from bottom */
+  right: 20px; /* Adjust distance from right */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.help-image {
+  width: 80px; /* Adjust the size of the bot image */
+  height: 80px;
+  cursor: pointer;
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image scales properly inside the circle */
+}
+
+/* Help Image */
+.help-image-container {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.bot-image-container {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 1000;
+  text-align: center; /* Center the message above the image */
+}
+
+.help-image {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+/* Style the message */
+.message {
+  position: relative;
+  bottom: 3px; /* Adjust to move the message above the image */
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #4a4e69;
+  padding: 5px;
+  border-radius: 8px;
+  animation: blink 3s infinite; /* Blink animation every 5 seconds */
+  cursor: pointer;
+}
+
+/* Define the blink animation */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.message:hover{
+  opacity: 0.25;
+}
+/* Heart container positioning and styling */
+.heart-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.heart {
+  font-size: 32px;
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+.heart.liked {
+  color: red;
+}
+
+.like-count {
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* FAQ Section */
+.faq-section {
+  margin-top: 20px;
+}
+
+.faq-item {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.faq-question {
+  background: #f1f1f1;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.faq-question:hover {
+  background: #ddd;
+}
+
+.faq-answer {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #2196f3;
+  margin-top: 5px;
+}

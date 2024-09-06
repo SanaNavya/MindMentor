@@ -1,0 +1,81 @@
+.bot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #7a5ea6; /* Dark lavender */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+.bot-header {
+  background-color: #9370db; /* Slightly lighter lavender */
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bot-messages {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.bot-message {
+  background-color: #dcd6f7; /* Bot message background */
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.user-message {
+  background-color: #add8e6; /* User message background */
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: right;
+}
+
+.bot-input-container {
+  display: flex;
+  gap: 10px;
+}
+
+.bot-input {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.bot-send-button {
+  padding: 8px 12px;
+  background-color: #9370db; /* Lavender purple */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bot-send-button:hover{
+    background-color: rgb(100, 71, 98);
+}
+.close-button{
+    width: 50px;
+    height: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(250,250,250,250);
+    margin-left: 220px ;
+    border: none;
+}
+.close-button:hover{
+    background-color: rgb(100, 71, 98);
+}
