@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
+
 import Bot from "./Bot"; // Import the Bot component
 
 export default function Dashboard() {
   const [selectedSection, setSelectedSection] = useState("home");
-  const [isBotVisible, setIsBotVisible] = useState(false); // Initially set to false
-  const [isBotIconVisible, setIsBotIconVisible] = useState(true); // Bot icon is always visible
-  const [isHeartLiked, setIsHeartLiked] = useState(false); // Heart is not liked initially
-  const [likeCount, setLikeCount] = useState(0); // Initial like count is 0
+  const [isBotVisible, setIsBotVisible] = useState(false);
+  const [isBotIconVisible, setIsBotIconVisible] = useState(true);
+  const [isProfileVisible, setIsProfileVisible] = useState(false);
   const [faqs, setFaqs] = useState([
     { question: "How do I reset my password?", answer: "Go to your profile settings and click on 'Reset Password'.", open: false },
     { question: "Where can I see my progress?", answer: "You can view your progress in the 'Progress' section.", open: false },
@@ -15,17 +15,9 @@ export default function Dashboard() {
     { question: "Can I retake a course?", answer: "Yes, you can retake any course from the 'Courses' section.", open: false },
   ]);
 
-  useEffect(() => {
-    const liked = localStorage.getItem("isHeartLiked");
-    const storedLikeCount = localStorage.getItem("likeCount");
+  const [celebrate, setCelebrate] = useState(null); // Manage celebration state
 
-    if (liked === "true") {
-      setIsHeartLiked(true);
-    }
-    if (storedLikeCount) {
-      setLikeCount(parseInt(storedLikeCount, 10));
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   const handleNavClick = (section) => {
     setSelectedSection(section);
@@ -40,65 +32,68 @@ export default function Dashboard() {
     setIsBotVisible(false);
   };
 
-  const handleHeartClick = () => {
-    if (!isHeartLiked) {
-      setIsHeartLiked(true);
-      setLikeCount((prevCount) => {
-        const newCount = prevCount + 1;
-        localStorage.setItem("likeCount", newCount);
-        return newCount;
-      });
-      localStorage.setItem("isHeartLiked", true);
-    }
+  const toggleFaq = (index) => {
+    setFaqs(
+      faqs.map((faq, i) => {
+        if (i === index) {
+          faq.open = !faq.open;
+        } else {
+          faq.open = false;
+        }
+        return faq;
+      })
+    );
   };
 
-  const toggleFaq = (index) => {
-    setFaqs(faqs.map((faq, i) => {
-      if (i === index) {
-        faq.open = !faq.open;
-      } else {
-        faq.open = false; // Close all other FAQ answers when one is clicked
-      }
-      return faq;
-    }));
+  const handleLeaderboardItemClick = (index) => {
+    setCelebrate(index);
+    setTimeout(() => setCelebrate(null), 1500); // Reset celebration after animation
   };
 
   return (
     <div className="dashboard-container">
-      <aside className="sidebar">
-        <h2 className="sidebar-title">Study Dashboard</h2>
-        <nav className="nav-menu">
-          <a href="#" className="nav-link" onClick={() => handleNavClick("home")}>
-            Home
-          </a>
-          <a href="#" className="nav-link" onClick={() => handleNavClick("courses")}>
-            Courses
-          </a>
-          <a href="#" className="nav-link" onClick={() => handleNavClick("progress")}>
-            Progress
-          </a>
-          <a href="#" className="nav-link" onClick={() => handleNavClick("profile")}>
-            Profile
-          </a>
-          <a href="#" className="nav-link" onClick={() => handleNavClick("help")}>
-            Help
-          </a>
-          <a href="#" className="nav-link" onClick={() => handleNavClick("logout")}>
-            Logout
-          </a>
-        </nav>
-      </aside>
+      <header className="header">
+        <div className="left-header">
+          <img
+            src="https://via.placeholder.com/100x50.png?text=Logo"
+            alt="Logo"
+            className="logo"
+          />
+        </div>
+        <div className="nav-menu">
+          <a href="#" className="nav-link" onClick={() => handleNavClick("home")}>Home</a>
+          <a href="#" className="nav-link" onClick={() => handleNavClick("courses")}>Courses</a>
+          <a href="#" className="nav-link" onClick={() => handleNavClick("LeaderBoard")}>LeaderBoard</a>
+          <a href="#" className="nav-link" onClick={() => handleNavClick("help")}>Help</a>
+        </div>
+        <div className="right-header">
+          <div
+            className="profile-image-container"
+            onMouseEnter={() => setIsProfileVisible(true)}
+            onMouseLeave={() => setIsProfileVisible(false)}
+          >
+            <img
+              src="https://i.pinimg.com/564x/6d/5f/c6/6d5fc60bae3dc6139eefa31af206596f.jpg"
+              alt="Profile"
+              className="profile-image"
+            />
+            {isProfileVisible && (
+              <div className="profile-dropdown">
+                <p><strong>User Name</strong></p>
+                <p>Email: user@example.com</p>
+                <p><a href="#">Profile Settings</a></p>
+                <p><a href="#">Logout</a></p>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
 
       <main className="main-content">
-        <header className="header">
-          <h1>Welcome back, [User Name]</h1>
-          <p>Let's continue learning!</p>
-        </header>
-
         {selectedSection === "home" && (
           <section className="home-section">
             <h2>Home</h2>
-            <p>Welcome to your dashboard. Use the menu to navigate through your study materials.</p>
+            <p>Hello Username! Welcome to your dashboard. Let's start learning today!</p>
           </section>
         )}
 
@@ -127,13 +122,6 @@ export default function Dashboard() {
           </section>
         )}
 
-        {selectedSection === "profile" && (
-          <section className="profile-section">
-            <h2>Your Profile</h2>
-            <p>Manage your profile information here.</p>
-          </section>
-        )}
-
         {selectedSection === "help" && (
           <section className="help-section">
             <div className="faq-section">
@@ -149,11 +137,53 @@ export default function Dashboard() {
                 ))}
               </ul>
             </div>
-            <p>How can we assist you? Click the image below to chat with our assistant.</p>
           </section>
         )}
 
-        {/* Bot image container visible on all sections */}
+        {selectedSection === "LeaderBoard" && (
+          <section className="leaderboard-section">
+            <h2>Leaderboard</h2>
+            <img
+              src="https://via.placeholder.com/1200x200?text=Leaderboard+Banner" // Add your leaderboard image URL here
+              alt="Leaderboard Banner"
+              className="leaderboard-banner"
+            />
+            <div className="leaderboard-container">
+              {[ 
+                { rank: 1, name: "Alice", score: 1500 },
+                { rank: 2, name: "Bob", score: 1400 },
+                { rank: 3, name: "Charlie", score: 1300 },
+                { rank: 4, name: "David", score: 1200 },
+                { rank: 5, name: "Eve", score: 1100 }
+              ].map((leader, index) => (
+                <div
+                  key={leader.rank}
+                  className={`leaderboard-item ${leader.rank === 1 ? "top-place" : leader.rank === 2 ? "second-place" : leader.rank === 3 ? "third-place" : "remaining-places"}`}
+                  onClick={() => handleLeaderboardItemClick(leader.rank)}
+                >
+                  <div className="place">{leader.rank}.</div>
+                  <div className="leader-info">
+                    <img
+                      src={`https://via.placeholder.com/50?text=${leader.name.charAt(0)}`}
+                      alt={leader.name}
+                      className="leader-avatar"
+                    />
+                    <div className="leader-details">
+                      <h3>{leader.name}</h3>
+                      <p>Score: {leader.score}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {celebrate !== null && (
+                <div className="fireworks-container">
+                  <div className="fireworks"></div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
         <div className="bot-image-container">
           {isBotIconVisible && (
             <>
@@ -168,11 +198,6 @@ export default function Dashboard() {
           )}
         </div>
       </main>
-
-      <div className="heart-container" onClick={handleHeartClick}>
-        <span className={`heart ${isHeartLiked ? "liked" : ""}`}>&#10084;</span>
-        <span className="like-count">{likeCount}</span>
-      </div>
 
       {isBotVisible && <Bot onClose={handleBotClose} />}
     </div>
