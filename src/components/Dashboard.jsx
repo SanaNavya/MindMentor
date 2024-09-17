@@ -140,49 +140,60 @@ export default function Dashboard() {
           </section>
         )}
 
-        {selectedSection === "LeaderBoard" && (
-          <section className="leaderboard-section">
-            <h2>Leaderboard</h2>
-            <img
-              src="https://via.placeholder.com/1200x200?text=Leaderboard+Banner" // Add your leaderboard image URL here
-              alt="Leaderboard Banner"
-              className="leaderboard-banner"
-            />
-            <div className="leaderboard-container">
-              {[ 
-                { rank: 1, name: "Alice", score: 1500 },
-                { rank: 2, name: "Bob", score: 1400 },
-                { rank: 3, name: "Charlie", score: 1300 },
-                { rank: 4, name: "David", score: 1200 },
-                { rank: 5, name: "Eve", score: 1100 }
-              ].map((leader, index) => (
-                <div
-                  key={leader.rank}
-                  className={`leaderboard-item ${leader.rank === 1 ? "top-place" : leader.rank === 2 ? "second-place" : leader.rank === 3 ? "third-place" : "remaining-places"}`}
-                  onClick={() => handleLeaderboardItemClick(leader.rank)}
-                >
-                  <div className="place">{leader.rank}.</div>
-                  <div className="leader-info">
-                    <img
-                      src={`https://via.placeholder.com/50?text=${leader.name.charAt(0)}`}
-                      alt={leader.name}
-                      className="leader-avatar"
-                    />
-                    <div className="leader-details">
-                      <h3>{leader.name}</h3>
-                      <p>Score: {leader.score}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {celebrate !== null && (
-                <div className="fireworks-container">
-                  <div className="fireworks"></div>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
+{selectedSection === "LeaderBoard" && (
+  <section className="leaderboard-section">
+    <h2>Leaderboard</h2>
+    
+    {/* Updated leaderboard layout */}
+    <div className="leaderboard-container">
+      <div className="leaderboard-row">
+        {/* Bronze */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(1)}>
+          <img src="bronze-icon-url" alt="Bronze" className="rank-icon" />
+          <p>Bronze</p>
+        </div>
+        {/* Silver */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(2)}>
+          <img src="silver-icon-url" alt="Silver" className="rank-icon" />
+          <p>Silver</p>
+        </div>
+        {/* Ruby */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(3)}>
+          <img src="ruby-icon-url" alt="Ruby" className="rank-icon" />
+          <p>Ruby</p>
+        </div>
+        {/* Gold */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(4)}>
+          <img src="gold-icon-url" alt="Gold" className="rank-icon" />
+          <p>Gold</p>
+        </div>
+        {/* Diamond */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(5)}>
+          <img src="diamond-icon-url" alt="Diamond" className="rank-icon" />
+          <p>Diamond</p>
+        </div>
+        {/* Sapphire */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(6)}>
+          <img src="sapphire-icon-url" alt="Sapphire" className="rank-icon" />
+          <p>Sapphire</p>
+        </div>
+        {/* Platinum */}
+        <div className="leaderboard-rank" onClick={() => handleLeaderboardItemClick(7)}>
+          <img src="platinum-icon-url" alt="Platinum" className="rank-icon" />
+          <p>Platinum</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Celebration fireworks when a rank is clicked */}
+    {celebrate !== null && (
+      <div className="fireworks-container">
+        <div className="fireworks"></div>
+      </div>
+    )}
+  </section>
+)}
+
 
         <div className="bot-image-container">
           {isBotIconVisible && (
